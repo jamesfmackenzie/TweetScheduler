@@ -8,3 +8,4 @@
 **/bin/*
 # Ignore the obj folder
 **/obj/*
+*.suo
