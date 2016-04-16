@@ -99,19 +99,19 @@ namespace TweetScheduler.ViewModel
 
         public string AccessToken
         {
-            get { return "foo"; }
+            get { return "bar"; }
             set { }
         }
 
         public string ConsumerKey
         {
-            get { return "foo"; }
+            get { return "baz"; }
             set { }
         }
 
         public string ConsumerToken
         {
-            get { return "foo"; }
+            get { return "qwe"; }
             set { }
         }
 
