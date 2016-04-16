@@ -1,0 +1,10 @@
+# Ignore NuGet Packages
+*.nupkg
+# Ignore the packages folder
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Ignore the bin folder
+**/bin/*
+# Ignore the obj folder
+**/obj/*
