@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Threading;
+using TweetScheduler.Model.Services;
 using TweetScheduler.ViewModel;
 
 namespace TweetScheduler.Model

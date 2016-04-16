@@ -5,36 +5,21 @@ using Tweetinvi;
 using Tweetinvi.Core.Credentials;
 using Tweetinvi.Core.Parameters;
 
-namespace TweetScheduler.Model
+namespace TweetScheduler.Model.Services
 {
     internal class TweetService
     {
         // TODO: move to separate Service folder/layer?
-        public string key = "KEY VALUE";
-        public string secret = "SECRET VALUE";
-        public string token = "TOKEN VALUE";
-        public string tokenSecret = "TOKEN SECRET";
-
-        public string Secret
-        {
-            get { return secret; }
-        }
-
-        public string Token
-        {
-            get { return token; }
-        }
-
-        public string TokenSecret
-        {
-            get { return tokenSecret; }
-        }
+        private const string KEY = "INSERT KEY";
+        private const string SECRET = "INSERT SECRET";
+        private const string TOKEN = "INSERT TOKEN";
+        private const string TOKENSECRET = "INSERT TOKEN SECRET";
 
         public void PostTweet(string status, List<string> imageUrls)
         {
             var webClient = new WebClient();
 
-            var credentials = new TwitterCredentials(key, secret, token, tokenSecret);
+            var credentials = new TwitterCredentials(KEY, SECRET, TOKEN, TOKENSECRET);
 
             var tweet = Auth.ExecuteOperationWithCredentials(credentials, () =>
             {

@@ -224,7 +224,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\TweetPoster.cs" />
-    <Compile Include="Model\TweetService.cs" />
+    <Compile Include="Model\Services\TweetService.cs" />
     <Compile Include="ViewModel\Collections\TrulyObservableCollection.cs" />
     <Compile Include="ViewModel\EditTweetWindowViewModel.cs" />
     <Compile Include="View\UserControls\ViewTweetUserControl.xaml.cs">
