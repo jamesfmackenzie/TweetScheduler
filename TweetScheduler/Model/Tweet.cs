@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 namespace TweetScheduler.Model
 {
@@ -20,6 +21,42 @@ namespace TweetScheduler.Model
             {
                 _status = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string StatusWithoutUrl
+        {
+            get
+            {
+                string toReturn = Status;
+
+                var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b",
+                    RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                foreach (Match m in linkParser.Matches(toReturn))
+                {
+                    toReturn = toReturn.Replace(m.Value, "");
+                }
+
+                return toReturn;
+            }
+        }
+
+        public List<string> StatusUrls
+        {
+            get
+            {
+                List<string> toReturn = new List<string>();
+
+                var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b",
+                    RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+                foreach (Match m in linkParser.Matches(Status))
+                {
+                    toReturn.Add(m.Value);
+                }
+
+                return toReturn;
             }
         }
 
