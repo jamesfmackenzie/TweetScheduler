@@ -227,11 +227,11 @@
     <Compile Include="Service\TweetPoster.cs" />
     <Compile Include="DataAccess\TweetService.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Filter\ITweetFilter.cs" />
-    <Compile Include="Filter\PostedTweetFilter.cs" />
-    <Compile Include="Filter\ScheduledTweetFilter.cs" />
+    <Compile Include="ViewModel\Filter\ITweetFilter.cs" />
+    <Compile Include="ViewModel\Filter\PostedTweetFilter.cs" />
+    <Compile Include="ViewModel\Filter\ScheduledTweetFilter.cs" />
     <Compile Include="Repository\TweetRepository.cs" />
-    <Compile Include="Filter\UnscheduledTweetFilter.cs" />
+    <Compile Include="ViewModel\Filter\UnscheduledTweetFilter.cs" />
     <Compile Include="ViewModel\EditTweetWindowViewModel.cs" />
     <Compile Include="ViewModel\TweetListViewModel.cs" />
     <Compile Include="View\UserControls\TweetListUserControl.xaml.cs">

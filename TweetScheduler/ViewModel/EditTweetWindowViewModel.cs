@@ -10,8 +10,8 @@ namespace TweetScheduler.ViewModel
 {
     internal class EditTweetWindowViewModel : ObservableObject
     {
-        private readonly TweetViewModel _tweetViewModel;
         private readonly TweetRepository _tweetRepository;
+        private readonly TweetViewModel _tweetViewModel;
         private string _mediaUrls;
         private string _status;
         private int _tweetLength;

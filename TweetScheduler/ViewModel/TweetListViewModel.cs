@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using GalaSoft.MvvmLight;
-using TweetScheduler.Filter;
 using TweetScheduler.Repository;
+using TweetScheduler.ViewModel.Filter;
 
 namespace TweetScheduler.ViewModel
 {
@@ -19,7 +19,11 @@ namespace TweetScheduler.ViewModel
             _tweetRepository = tweetRepository;
             _filter = filter;
             Name = name;
-            Tweets = new ObservableCollection<TweetViewModel>(_tweetRepository.GetAll().Select(t => new TweetViewModel(t, _tweetRepository)).OrderBy(t => t.ScheduledDateTime));
+            Tweets =
+                new ObservableCollection<TweetViewModel>(
+                    _tweetRepository.GetAll()
+                        .Select(t => new TweetViewModel(t, _tweetRepository))
+                        .OrderBy(t => t.ScheduledDateTime));
 
             tweetRepository.TweetAddedUpdatedOrDeleted += TweetRepository_TweetAddedUpdatedOrDeleted;
         }
@@ -38,7 +42,11 @@ namespace TweetScheduler.ViewModel
 
         private void TweetRepository_TweetAddedUpdatedOrDeleted(object sender, EventArgs e)
         {
-            Tweets = new ObservableCollection<TweetViewModel>(_tweetRepository.GetAll().Select(t => new TweetViewModel(t, _tweetRepository)).OrderBy(t => t.ScheduledDateTime));
+            Tweets =
+                new ObservableCollection<TweetViewModel>(
+                    _tweetRepository.GetAll()
+                        .Select(t => new TweetViewModel(t, _tweetRepository))
+                        .OrderBy(t => t.ScheduledDateTime));
         }
     }
 }

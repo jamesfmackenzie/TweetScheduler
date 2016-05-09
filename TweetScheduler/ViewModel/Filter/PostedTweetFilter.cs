@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using TweetScheduler.ViewModel;
 
-namespace TweetScheduler.Filter
+namespace TweetScheduler.ViewModel.Filter
 {
     public class PostedTweetFilter : ITweetFilter
     {

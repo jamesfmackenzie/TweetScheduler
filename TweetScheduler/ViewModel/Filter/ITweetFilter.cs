@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using TweetScheduler.ViewModel;
 
-namespace TweetScheduler.Filter
+namespace TweetScheduler.ViewModel.Filter
 {
     public interface ITweetFilter
     {

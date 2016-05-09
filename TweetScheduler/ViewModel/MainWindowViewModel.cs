@@ -1,18 +1,18 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using TweetScheduler.Filter;
 using TweetScheduler.Model;
 using TweetScheduler.Repository;
-using TweetScheduler.View.Windows;
 using TweetScheduler.Service;
+using TweetScheduler.View.Windows;
+using TweetScheduler.ViewModel.Filter;
 
 namespace TweetScheduler.ViewModel
 {
     internal class MainWindowViewModel : ViewModelBase
     {
-        private readonly TweetRepository _tweetRepository;
         private readonly TweetPoster _tweetPoster;
+        private readonly TweetRepository _tweetRepository;
 
         public MainWindowViewModel()
         {
