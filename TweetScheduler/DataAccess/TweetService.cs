@@ -5,15 +5,16 @@ using Tweetinvi;
 using Tweetinvi.Core.Credentials;
 using Tweetinvi.Core.Parameters;
 
-namespace TweetScheduler.Model.Services
+namespace TweetScheduler.DataAccess
 {
+    //TODO: sort out class visibility
+    // TODO: tests!!!
     internal class TweetService
     {
-        // TODO: move to separate Service folder/layer?
-        private const string KEY = "INSERT KEY";
-        private const string SECRET = "INSERT SECRET";
-        private const string TOKEN = "INSERT TOKEN";
-        private const string TOKENSECRET = "INSERT TOKEN SECRET";
+        private const string KEY = "INSERT CONSUMER KEY HERE";
+        private const string SECRET = "INSERT CONSUMER SECRET HERE";
+        private const string TOKEN = "INSERT TOKEN HERE";
+        private const string TOKENSECRET = "INSERT TOKEN SECRET HERE";
 
         public void PostTweet(string status, List<string> imageUrls)
         {

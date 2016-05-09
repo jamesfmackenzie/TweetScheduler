@@ -16,30 +16,30 @@
 					<Grid Margin="5">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="0.5*" />
 							<ColumnDefinition Width="0.5*" />
 						</Grid.ColumnDefinitions>
 						<Label Margin="5" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Content="{Binding StatusWithoutUrl}" />
-                        <Label Margin="5 0 5 0" Grid.Row="1" Grid.Column="0">
-                            <ItemsControl ItemsSource="{Binding StatusUrls}" Margin="0">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock>
+						<Label Margin="5 0 5 0" Grid.Row="1" Grid.Column="0">
+							<ItemsControl ItemsSource="{Binding StatusUrls}" Margin="0">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock>
 												<Hyperlink NavigateUri="{Binding}" RequestNavigate="Hyperlink_RequestNavigate">
 													<TextBlock MaxWidth="500" TextTrimming="CharacterEllipsis" Text="{Binding}" />
 												</Hyperlink>
 											</TextBlock>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </Label>
-                        <Label Margin="5 0 5 5" Grid.Row="2" Grid.Column="0">
+										</StackPanel>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</Label>
+						<Label Margin="5 0 5 5" Grid.Row="2" Grid.Column="0">
 							<ItemsControl ItemsSource="{Binding MediaUrls}" Margin="0">
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
@@ -54,8 +54,13 @@
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>
 						</Label>
-						<Label Margin="5 0 5 5" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Content="{Binding ScheduledDateTime}" />
-					</Grid>
+						<Label Margin="5 0 5 5" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1"
+						       Content="{Binding ScheduledDateTime}" />
+                        <StackPanel Orientation="Horizontal" Margin="5 0 10 5" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1">
+                            <Button VerticalAlignment="Bottom" Margin="5 0 0 0" Padding="5 0 5 0" Command="{Binding EditButtonClickCommand}" CommandParameter="{Binding}">Edit</Button>
+                            <Button VerticalAlignment="Bottom" Margin="5 0 0 0" Padding="5 0 5 0" Command="{Binding DeleteButtonClickCommand}" CommandParameter="{Binding}">Delete</Button>
+                        </StackPanel>
+                    </Grid>
 				</Grid>
 			</Border>
 		</Grid>

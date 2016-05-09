@@ -9,12 +9,12 @@
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         Title="EditTweetWindow" Height="480" Width="640">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
-            <command:EventToCommand Command="{Binding WindowClosing}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-    <Grid>
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Closing">
+			<command:EventToCommand Command="{Binding WindowClosingCommand}" PassEventArgsToCommand="True" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	<Grid>
 		<Grid HorizontalAlignment="Stretch" Margin="10">
 			<Border BorderBrush="#ABADB3" BorderThickness="1">
 				<Grid>
@@ -23,7 +23,7 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="110" />
@@ -32,16 +32,19 @@
 						<Label Margin="5" Grid.Row="0" Grid.Column="0" Content="Status:" />
 						<Label Margin="5" Grid.Row="1" Grid.Column="0" Content="Media Urls:" />
 						<Label Margin="5" Grid.Row="2" Grid.Column="0" Content="Scheduled Time:" />
-						<TextBox HorizontalAlignment="Stretch" Height="200" AcceptsReturn="True" Grid.Column="1" Grid.Row="0" Margin="8" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBox HorizontalAlignment="Stretch" Height="70" AcceptsReturn="True" Grid.Column="1" Grid.Row="1" Margin="8" Text="{Binding MediaUrls, UpdateSourceTrigger=PropertyChanged}" />
-                        <xctk:DateTimePicker HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="8" Value="{Binding Path=ScheduledDateTime, TargetNullValue={x:Static System:DateTime.Now}}" />
+						<TextBox HorizontalAlignment="Stretch" Height="200" AcceptsReturn="True" Grid.Column="1" Grid.Row="0" Margin="8"
+						         Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" />
+						<TextBox HorizontalAlignment="Stretch" Height="70" AcceptsReturn="True" Grid.Column="1" Grid.Row="1" Margin="8"
+						         Text="{Binding MediaUrls, UpdateSourceTrigger=PropertyChanged}" />
+						<xctk:DateTimePicker HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="8"
+						                     Value="{Binding Path=ScheduledDateTime, TargetNullValue={x:Static System:DateTime.Now}}" />
 						<!-- TODO: add save and cancel functionality
                         <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Padding="8, 2, 8, 3" Grid.Column="1"
 								        Grid.Row="4">
                             Save
                         </Button>
                         -->
-                        <Label Margin="5" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" Content="{Binding TweetLength}" />
+						<Label Margin="5" HorizontalAlignment="Right" Grid.Row="3" Grid.Column="1" Content="{Binding TweetLength}" />
 					</Grid>
 				</Grid>
 			</Border>

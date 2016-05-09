@@ -15,7 +15,24 @@
 		<viewModel:MainWindowViewModel />
 	</Window.DataContext>
 	<Grid>
-		<TabControl>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="40" />
+		</Grid.RowDefinitions>
+		<TabControl Grid.Row="0" ItemsSource="{Binding TweetsViewModelCollection}">
+			<TabControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+			<TabControl.ContentTemplate>
+				<DataTemplate>
+					<userControls:ScheduledTweetUserControl DataContext="{Binding}" />
+				</DataTemplate>
+			</TabControl.ContentTemplate>
+		</TabControl>
+		<Button Margin="10" Grid.Row="1" Command="{Binding NewTweetCommand}">New Tweet</Button>
+		<!--<TabControl>
 			<TabItem Header="Unscheduled Tweets">
 				<Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -33,23 +50,9 @@
                     <Button Margin="10" Grid.Row="1" Command="{Binding NewTweetCommand}">New Tweet</Button>
 				</Grid>
 			</TabItem>
-			<TabItem Header="Scheduled Tweets">
-				<Grid Margin="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-                    <ListBox Grid.Row="0" ItemsSource="{Binding ScheduledTweets}" Name="ScheduledTweetsListBox"
-					         HorizontalContentAlignment="Stretch">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <userControls:ViewTweetUserControl />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    <Button Margin="10" Grid.Row="1" Command="{Binding NewTweetCommand}">New Tweet</Button>
-                </Grid>
-			</TabItem>
+            <TabItem Header="Scheduled Tweets">
+                <userControls:ScheduledTweetUserControl DataContext="{Binding ScheduledTweetsViewModel}" />
+            </TabItem>
 			<TabItem Header="Posted Tweets">
 				<Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -99,6 +102,6 @@
 					</Border>
 				</Grid>
 			</TabItem>
-		</TabControl>
+		</TabControl>-->
 	</Grid>
 </Window>

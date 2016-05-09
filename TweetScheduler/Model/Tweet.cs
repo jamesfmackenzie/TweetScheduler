@@ -1,104 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
+using TweetScheduler.ViewModel;
 
 namespace TweetScheduler.Model
 {
-    // TODO: should *NOT* implement INotifyPropertyChanged (separate viewmodel class for that!)
-    internal class Tweet : INotifyPropertyChanged
+    public class Tweet
     {
-        private List<string> _mediaUrls;
-        private bool _posted;
-        private DateTime? _scheduledDateTime;
-        private string _status;
-
-        public string Status
+        public Tweet()
         {
-            get { return _status; }
-            set
-            {
-                _status = value;
-                OnPropertyChanged();
-            }
+            Id = Guid.NewGuid();
         }
 
-        public string StatusWithoutUrl
+        // TODO: should this translation be here? It builds dependency between Model and ViewModel
+        public Tweet(TweetViewModel tweetViewModel)
         {
-            get
-            {
-                string toReturn = Status;
-
-                var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b",
-                    RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-                foreach (Match m in linkParser.Matches(toReturn))
-                {
-                    toReturn = toReturn.Replace(m.Value, "");
-                }
-
-                return toReturn;
-            }
+            Status = tweetViewModel.Status;
+            Id = tweetViewModel.Id;
+            ScheduledDateTime = tweetViewModel.ScheduledDateTime;
+            MediaUrls = tweetViewModel.MediaUrls;
+            Posted = tweetViewModel.Posted;
         }
 
-        public List<string> StatusUrls
-        {
-            get
-            {
-                List<string> toReturn = new List<string>();
-
-                var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b",
-                    RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-                foreach (Match m in linkParser.Matches(Status))
-                {
-                    toReturn.Add(m.Value);
-                }
-
-                return toReturn;
-            }
-        }
-
-        public DateTime? ScheduledDateTime
-        {
-            get { return _scheduledDateTime; }
-            set
-            {
-                _scheduledDateTime = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public List<string> MediaUrls
-        {
-            get { return _mediaUrls; }
-            set
-            {
-                _mediaUrls = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool Posted
-        {
-            get { return _posted; }
-            set
-            {
-                _posted = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] String caller = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(caller));
-            }
-        }
+        public string Status { get; set; }
+        public Guid Id { get; set; }
+        public DateTime? ScheduledDateTime { get; set; }
+        public List<string> MediaUrls { get; set; }
+        public bool Posted { get; set; }
     }
 }

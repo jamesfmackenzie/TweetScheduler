@@ -1,33 +1,36 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using System.Windows.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using TweetScheduler.Model;
-using TweetScheduler.ViewModel.Commands;
+using TweetScheduler.Repository;
 
 namespace TweetScheduler.ViewModel
 {
-    internal class EditTweetWindowViewModel : INotifyPropertyChanged
+    internal class EditTweetWindowViewModel : ObservableObject
     {
-        private readonly Tweet _tweet;
+        private readonly TweetViewModel _tweetViewModel;
+        private readonly TweetRepository _tweetRepository;
         private string _mediaUrls;
         private string _status;
         private int _tweetLength;
 
-        public EditTweetWindowViewModel(Tweet tweet)
+        public EditTweetWindowViewModel(TweetViewModel tweetViewModel, TweetRepository tweetRepository)
         {
-            _tweet = tweet;
+            _tweetViewModel = tweetViewModel;
+            _tweetRepository = tweetRepository;
 
-            Status = tweet.Status;
+            Status = tweetViewModel.Status;
 
-            if (tweet.MediaUrls != null)
+            if (tweetViewModel.MediaUrls != null)
             {
-                MediaUrls = string.Join("\n", tweet.MediaUrls);
+                MediaUrls = string.Join("\n", tweetViewModel.MediaUrls);
             }
 
-            ScheduledDateTime = tweet.ScheduledDateTime;
+            ScheduledDateTime = tweetViewModel.ScheduledDateTime;
+
+            WindowClosingCommand = new RelayCommand(SaveTweetAndCloseWindow);
         }
 
         public string Status
@@ -55,33 +58,26 @@ namespace TweetScheduler.ViewModel
         public int TweetLength
         {
             get { return _tweetLength; }
-            set
-            {
-                _tweetLength = value;
-                OnPropertyChanged();
-            }
+            set { Set(() => TweetLength, ref _tweetLength, value); }
         }
 
-        public ICommand WindowClosing
+        public RelayCommand WindowClosingCommand { get; private set; }
+
+        private void SaveTweetAndCloseWindow()
         {
-            get
+            // TODO: validation?
+
+            if (!string.IsNullOrEmpty(MediaUrls))
             {
-                return new RelayCommand(
-                    args =>
-                    {
-                        // TODO: verify that all urls are in correct format and eliminate empty strings
-                        if (!string.IsNullOrEmpty(MediaUrls))
-                        {
-                            _tweet.MediaUrls = MediaUrls.Split('\n').ToList();
-                        }
-
-                        _tweet.Status = Status;
-                        _tweet.ScheduledDateTime = ScheduledDateTime;
-                    });
+                _tweetViewModel.MediaUrls = MediaUrls.Replace("\r", "").Split('\n').ToList();
             }
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+            _tweetViewModel.Status = Status;
+            _tweetViewModel.ScheduledDateTime = ScheduledDateTime;
+            _tweetViewModel.Posted = false;
+
+            _tweetRepository.SaveOrUpdate(new Tweet(_tweetViewModel));
+        }
 
         private void CalcTweetLength()
         {
@@ -113,15 +109,6 @@ namespace TweetScheduler.ViewModel
             else
             {
                 TweetLength = 0;
-            }
-        }
-
-        private void OnPropertyChanged([CallerMemberName] String caller = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(caller));
             }
         }
     }
